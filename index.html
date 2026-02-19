@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LUMINA CLEAN – Higiene Institucional</title>
+    <style>
+        :root {
+            --color-principal: #0b7285;   /* celeste petróleo */
+            --color-secundario: #15aabf;  /* celeste más claro */
+            --color-acento: #ffd43b;      /* amarillo acento */
+            --gris-suave: #f5f5f5;
+            --gris-medio: #666;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: var(--gris-suave);
+            color: #222;
+        }
+
+        header {
+            background: white;
+            border-bottom: 1px solid #ddd;
+            padding: 12px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #fff, var(--color-principal));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 800;
+            font-size: 18px;
+        }
+
+        .logo-text-main {
+            font-weight: 800;
+            letter-spacing: 1px;
+            color: var(--color-principal);
+        }
+
+        .logo-text-sub {
+            font-size: 12px;
+            color: var(--gris-medio);
+        }
+
+        nav a {
+            color: var(--gris-medio);
+            margin-left: 20px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        nav a:hover {
+            color: var(--color-principal);
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+            gap: 30px;
+            padding: 60px 40px 40px;
+            background: linear-gradient(135deg, #e7f5ff, #f8f9fa);
+        }
+
+        .hero-text h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+            color: #111;
+        }
+
+        .hero-text h1 span {
+            color: var(--color-principal);
+        }
+
+        .hero-text p {
+            color: var(--gris-medio);
+            max-width: 520px;
+        }
+
+        .hero-badges {
+            margin: 18px 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .badge {
+            padding: 6px 12px;
+            border-radius: 999px;
+            font-size: 12px;
+            background: white;
+            border: 1px solid #dee2e6;
+            color: var(--gris-medio);
+        }
+
+        .hero-cta {
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .btn {
+            border-radius: 999px;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .btn-primary {
+            background: var(--color-principal);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #095469;
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--color-principal);
+            border: 1px solid var(--color-principal);
+        }
+
+        .hero-image {
+            background: url('https://images.unsplash.com/photo-1581579188871-45ea61f2a0c8?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+            border-radius: 18px;
+            min-height: 220px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-tag {
+            position: absolute;
+            bottom: 16px;
+            left: 16px;
+            background: rgba(11, 114, 133, 0.9);
+            color: white;
+            padding: 8px 14px;
+            border-radius: 999px;
+            font-size: 12px;
+        }
+
+        section {
+            padding: 40px;
+        }
+
+        h2 {
+            color: #111;
+            margin-bottom: 6px;
+        }
+
+        .section-subtitle {
+            font-size: 13px;
+            color: var(--gris-medio);
+            margin-bottom: 20px;
+        }
+
+        /* Nosotros */
+        .nosotros-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+            gap: 30px;
+        }
+
+        .nosotros-card {
+            background: white;
+            border-radius: 14px;
+            padding: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+        }
+
+        .nosotros-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .nosotros-list li {
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: var(--gris-medio);
+        }
+
+        .nosotros-list li::before {
+            content: "• ";
+            color: var(--color-principal);
+            font-weight: bold;
+        }
+
+        /* Productos / catálogo */
+        .productos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 20px;
+        }
+
+        .producto {
+            background: white;
+            border-radius: 14px;
+            padding: 16px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .producto img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .producto h3 {
+            margin: 6px 0;
+            font-size: 16px;
+        }
+
+        .producto .sku {
+            font-size: 11px;
+            color: var(--gris-medio);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
+        .producto p {
+            font-size: 13px;
+            color: var(--gris-medio);
+            flex: 1;
+        }
+
+        .producto-precio {
+            margin-top: 8px;
+            font-weight: 700;
+            color: var(--color-principal);
+        }
+
+        .producto-precio span {
+            font-size: 12px;
+            color: var(--gris-medio);
+            font-weight: 400;
+        }
+
+        .producto-bottom {
+            margin-top: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .producto-bottom input {
+            width: 60px;
+            padding: 6px;
+            border-radius: 999px;
+            border: 1px solid #ddd;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        .btn-mini {
+            padding: 7px 12px;
+            font-size: 12px;
+            border-radius: 999px;
+            border: none;
+            cursor: pointer;
+            background: var(--color-secundario);
+            color: white;
+            font-weight: 600;
+        }
+
+        .btn-mini:hover {
+            background: #1098ad;
+        }
+
+        /* Carrito */
+        .carrito-panel {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            width: 280px;
+            max-height: 60vh;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.18);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            z-index: 20;
+        }
+
+        .carrito-header {
+            padding: 10px 14px;
+            background: var(--color-principal);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+        }
+
+        .carrito-body {
+            padding: 10px 14px;
+            overflow-y: auto;
+            font-size: 13px;
+        }
+
+        .carrito-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 6px;
+        }
+
+        .carrito-footer {
+            padding: 10px 14px;
+            border-top: 1px solid #eee;
+            font-size: 13px;
+        }
+
+        .carrito-total {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .carrito-btn {
+            width: 100%;
+            padding: 8px;
+            border-radius: 999px;
+            border: none;
+            background: var(--color-acento);
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        /* Servicios */
+        .servicios-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+        }
+
+        .servicio-card {
+            background: white;
+            border-radius: 14px;
+            padding: 16px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+            font-size: 14px;
+            color: var(--gris-medio);
+        }
+
+        .servicio-title {
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #111;
+        }
+
+        /* Contacto */
+        .contacto-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+            gap: 30px;
+        }
+
+        .contacto form {
+            background: white;
+            border-radius: 14px;
+            padding: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .contacto input, .contacto textarea {
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            font-size: 14px;
+        }
+
+        .contacto button {
+            margin-top: 6px;
+        }
+
+        .contacto-info {
+            font-size: 14px;
+            color: var(--gris-medio);
+        }
+
+        .contacto-info strong {
+            color: #111;
+        }
+
+        footer {
+            padding: 18px 40px;
+            background: #111;
+            color: #aaa;
+            font-size: 12px;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        @media (max-width: 900px) {
+            .hero,
+            .nosotros-grid,
+            .contacto-grid {
+                grid-template-columns: 1fr;
+            }
+
+            header {
+                padding: 10px 16px;
+            }
+
+            section {
+                padding: 30px 16px;
+            }
+
+            .hero {
+                padding: 40px 16px 24px;
+            }
+
+            .carrito-panel {
+                right: 10px;
+                left: 10px;
+                width: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo">
+        <div class="logo-icon">LC</div>
+        <div>
+            <div class="logo-text-main">LUMINA CLEAN</div>
+            <div class="logo-text-sub">Higiene institucional • Venta y distribución</div>
+        </div>
+    </div>
+    <nav>
+        <a href="#nosotros">Nosotros</a>
+        <a href="#productos">Catálogo</a>
+        <a href="#servicios">Servicios</a>
+        <a href="#contacto">Contacto</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <div class="hero-text">
+        <h1>Soluciones en <span>higiene institucional</span> para tu empresa</h1>
+        <p>
+            LUMINA CLEAN provee insumos de higiene profesional para industrias, comercios, colegios, clínicas y
+            administraciones. Trabajamos con marcas líderes y logística ágil en todo el país.
+        </p>
+        <div class="hero-badges">
+            <div class="badge">Distribución mayorista</div>
+            <div class="badge">Marcas premium y económicas</div>
+            <div class="badge">Atención personalizada</div>
+        </div>
+        <div class="hero-cta">
+            <button class="btn btn-primary" onclick="document.getElementById('productos').scrollIntoView({behavior:'smooth'})">
+                Ver catálogo
+            </button>
+            <button class="btn btn-secondary" onclick="document.getElementById('contacto').scrollIntoView({behavior:'smooth'})">
+                Pedir cotización
+            </button>
+        </div>
+    </div>
+    <div class="hero-image">
+        <div class="hero-tag">Stock permanente • Entregas programadas</div>
+    </div>
+</section>
+
+<section id="nosotros">
+    <h2>Sobre LUMINA CLEAN</h2>
+    <div class="section-subtitle">Venta y distribución de productos de higiene institucional</div>
+
+    <div class="nosotros-grid">
+        <div class="nosotros-card">
+            <p>
+                Somos un equipo especializado en abastecer a empresas e instituciones con insumos de higiene
+                profesional. Entendemos las necesidades de consumo, reposición y presupuesto de cada rubro, y
+                armamos propuestas a medida.
+            </p>
+            <ul class="nosotros-list">
+                <li>Abastecimiento continuo para baños, cocinas y áreas comunes.</li>
+                <li>Productos certificados y de marcas reconocidas.</li>
+                <li>Opciones premium y líneas económicas para optimizar costos.</li>
+                <li>Atención directa por WhatsApp, mail y teléfono.</li>
+            </ul>
+        </div>
+        <div class="nosotros-card">
+            <strong>Rubros que atendemos:</strong>
+            <ul class="nosotros-list">
+                <li>Industrias y depósitos.</li>
+                <li>Comercios, supermercados y locales gastronómicos.</li>
+                <li>Colegios, universidades y oficinas.</li>
+                <li>Clínicas, sanatorios y consultorios.</li>
+                <li>Consorcios y administraciones de edificios.</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<section id="productos">
+    <h2>Catálogo principal</h2>
+    <div class="section-subtitle">Ejemplo de productos y precios de referencia (ARS)</div>
+
+    <div class="productos-grid">
+        <!-- Producto 1 -->
+        <div class="producto" data-nombre="Papel Higiénico Jumbo 300m" data-precio="6500">
+            <span class="sku">Código: PHJ-300</span>
+            <img src="https://images.unsplash.com/photo-1581579188871-45ea61f2a0c8?auto=format&fit=crop&w=800&q=80" alt="">
+            <h3>Papel Higiénico Jumbo 300m</h3>
+            <p>Rollo institucional alto metraje, doble hoja. Ideal para baños de alto tránsito.</p>
+            <div class="producto-precio">
+                $ 6.500 <span>/ caja x 8 rollos</span>
+            </div>
+            <div class="producto-bottom">
+                <input type="number" min="1" value="1" class="cantidad-input">
+                <button class="btn-mini" onclick="agregarAlCarrito(this)">Agregar</button>
+            </div>
+        </div>
+
+        <!-- Producto 2 -->
+        <div class="producto" data-nombre="Toalla Intercalada Blanca" data-precio="5200">
+            <span class="sku">Código: TIB-200</span>
+            <img src="https://images.unsplash.com/photo-1603354350317-6f7aaa5911c5?auto=format&fit=crop&w=800&q=80" alt="">
+            <h3>Toalla Intercalada Blanca</h3>
+            <p>Toalla de mano intercalada, hoja simple y doble. Compatible con dispensers estándar.</p>
+            <div class="producto-precio">
+                $ 5.200 <span>/ caja</span>
+            </div>
+            <div class="producto-bottom">
+                <input type="number" min="1" value="1" class="cantidad-input">
+                <button class="btn-mini" onclick="agregarAlCarrito(this)">Agregar</button>
+            </div>
+        </div>
+
+        <!-- Producto 3 -->
+        <div class="producto" data-nombre="Jabón Líquido Antibacterial" data-precio="4300">
+            <span class="sku">Código: JLA-5000</span>
+            <img src="https://images.unsplash.com/photo-1583947581924-860bda6a26f1?auto=format&fit=crop&w=800&q=80" alt="">
+            <h3>Jabón Líquido Antibacterial</h3>
+            <p>Bidón 5L para recarga de dispensers. Fórmula suave, alto rendimiento.</p>
+            <div class="producto-precio">
+                $ 4.300 <span>/ bidón 5L</span>
+            </div>
+            <div class="producto-bottom">
+                <input type="number" min="1" value="1" class="cantidad-input">
+                <button class="btn-mini" onclick="agregarAlCarrito(this)">Agregar</button>
+            </div>
+        </div>
+
+        <!-- Producto 4 -->
+        <div class="producto" data-nombre="Desinfectante Amonio Cuaternario" data-precio="7800">
+            <span class="sku">Código: DAC-5000</span>
+            <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=800&q=80" alt="">
+            <h3>Desinfectante Amonio Cuaternario</h3>
+            <p>Desinfectante concentrado para superficies, apto uso institucional.</p>
+            <div class="producto-precio">
+                $ 7.800 <span>/ bidón 5L</span>
+            </div>
+            <div class="producto-bottom">
+                <input type="number" min="1" value="1" class="cantidad-input">
+                <button class="btn-mini" onclick="agregarAlCarrito(this)">Agregar</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="servicios">
+    <h2>Servicios</h2>
+    <div class="section-subtitle">Acompañamos todo el circuito de abastecimiento</div>
+
+    <div class="servicios-grid">
+        <div class="servicio-card">
+            <div class="servicio-title">Distribución y logística</div>
+            Entregas programadas, armado de rutas y seguimiento de pedidos. Coordinamos según tu consumo mensual.
+        </div>
+        <div class="servicio-card">
+            <div class="servicio-title">Asesoramiento en consumo</div>
+            Te ayudamos a definir cantidades, formatos y combinaciones de productos para optimizar costos.
+        </div>
+        <div class="servicio-card">
+            <div class="servicio-title">Líneas premium y económicas</div>
+            Trabajamos con primeras marcas y alternativas competitivas para cada tipo de cliente.
+        </div>
+        <div class="servicio-card">
+            <div class="servicio-title">Atención personalizada</div>
+            Canal directo por WhatsApp, mail y teléfono para pedidos, consultas y urgencias.
+        </div>
+    </div>
+</section>
+
+<section id="contacto" class="contacto">
+    <h2>Contacto y pedidos</h2>
+    <div class="section-subtitle">Enviá tu consulta o pedí una lista de precios actualizada</div>
+
+    <div class="contacto-grid">
+        <form onsubmit="enviarFormulario(event)">
+            <input type="text" name="nombre" placeholder="Nombre y apellido" required>
+            <input type="text" name="empresa" placeholder="Empresa / Razón social">
+            <input type="email" name="email" placeholder="Correo electrónico" required>
+            <input type="tel" name="telefono" placeholder="Teléfono / WhatsApp">
+            <textarea name="mensaje" rows="4" placeholder="Contanos qué productos te interesan o tu tipo de negocio" required></textarea>
+            <button type="submit" class="btn btn-primary">Enviar consulta</button>
+            <small style="font-size:11px;color:#888;">Este formulario no envía aún, podés copiar el texto y pegarlo en tu mail o WhatsApp.</small>
+        </form>
+
+        <div class="contacto-info">
+            <p><strong>Datos de contacto</strong></p>
+            <p>
+                Correo: <strong>info@lumina-clean.com</strong><br>
+                WhatsApp: <strong>+54 11 0000-0000</strong><br>
+                Zona: <strong>La Tablada, Prov. de Buenos Aires</strong>
+            </p>
+            <p>
+                También podemos enviarte:<br>
+                • Lista de precios mayorista actualizada.<br>
+                • Promociones vigentes por volumen.<br>
+                • Recomendaciones según tu consumo mensual.
+            </p>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div>© 2026 LUMINA CLEAN – Higiene institucional • Venta y distribución</div>
+    <div>Desarrollado para uso institucional y comercial</div>
+</footer>
+
+<!-- Carrito flotante -->
+<div class="carrito-panel">
+    <div class="carrito-header">
+        <span>Carrito de consulta</span>
+        <span id="carrito-cantidad">0 ítems</span>
+    </div>
+    <div class="carrito-body" id="carrito-items">
+        <div style="color:#999;font-size:12px;">Agregá productos del catálogo para armar tu pedido.</div>
+    </div>
+    <div class="carrito-footer">
+        <div class="carrito-total">
+            <span>Total estimado:</span>
+            <span id="carrito-total">$ 0</span>
+        </div>
+        <button class="carrito-btn" onclick="copiarResumen()">
+            Copiar resumen para enviar por mail / WhatsApp
+        </button>
+    </div>
+</div>
+
+<script>
+    const carrito = [];
+
+    function agregarAlCarrito(boton) {
+        const card = boton.closest('.producto');
+        const nombre = card.dataset.nombre;
+        const precio = parseFloat(card.dataset.precio);
+        const input = card.querySelector('.cantidad-input');
+        const cantidad = parseInt(input.value) || 1;
+
+        const existente = carrito.find(item => item.nombre === nombre);
+        if (existente) {
+            existente.cantidad += cantidad;
+        } else {
+            carrito.push({ nombre, precio, cantidad });
+        }
+
+        actualizarCarrito();
+        input.value = 1;
+    }
+
+    function actualizarCarrito() {
+        const contenedor = document.getElementById('carrito-items');
+        contenedor.innerHTML = '';
+
+        if (carrito.length === 0) {
+            contenedor.innerHTML = '<div style="color:#999;font-size:12px;">Agregá productos del catálogo para armar tu pedido.</div>';
+        } else {
+            carrito.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'carrito-item';
+                div.innerHTML = `
+                    <span>${item.cantidad} x ${item.nombre}</span>
+                    <span>$ ${(item.precio * item.cantidad).toLocaleString('es-AR')}</span>
+                `;
+                contenedor.appendChild(div);
+            });
+        }
+
+        const total = carrito.reduce((acc, item) => acc + item.precio * item.cantidad, 0);
+        document.getElementById('carrito-total').textContent = '$ ' + total.toLocaleString('es-AR');
+        document.getElementById('carrito-cantidad').textContent = carrito.length + (carrito.length === 1 ? ' ítem' : ' ítems');
+    }
+
+    function copiarResumen() {
+        if (carrito.length === 0) {
+            alert('No hay productos en el carrito.');
+            return;
+        }
+
+        let texto = 'Pedido de productos – LUMINA CLEAN\n\n';
+        carrito.forEach(item => {
+            texto += `${item.cantidad} x ${item.nombre} – $ ${(item.precio * item.cantidad).toLocaleString('es-AR')}\n`;
+        });
+        const total = carrito.reduce((acc, item) => acc + item.precio * item.cantidad, 0);
+        texto += `\nTotal estimado: $ ${total.toLocaleString('es-AR')}\n\n`;
+        texto += 'Por favor, completar con datos de facturación y envío.';
+
+        navigator.clipboard.writeText(texto)
+            .then(() => alert('Resumen copiado. Pegalo en tu mail o WhatsApp.'))
+            .catch(() => alert('No se pudo copiar automáticamente.'));
+
+    }
+
+    function enviarFormulario(e) {
+        e.preventDefault();
+        alert('Este formulario es de muestra. Podés conectar esto a tu mail más adelante.');
+    }
+</script>
+
+</body>
+</html>
